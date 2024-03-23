@@ -10,7 +10,7 @@ public class TimeStop : MonoBehaviour
     // Start is called before the first frame update
     void Update()
     {
-        if(Input.GetKey(KeyCode.T))
+        if(Input.GetKey(KeyCode.Tab))
         {
             ToggleTimeStop();
             
