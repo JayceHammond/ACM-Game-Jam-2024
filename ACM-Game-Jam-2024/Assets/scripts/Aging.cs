@@ -16,6 +16,7 @@ public class Aging : MonoBehaviour
 
     void Update()
     {
+        /*
         if (Input.GetKey(KeyCode.X)) // Press 'x' to shrink
         {
             ShrinkPrefab();
@@ -25,6 +26,7 @@ public class Aging : MonoBehaviour
             GrowPrefab();
         }
         Debug.Log(timer);
+        */
     }
 
     void SwitchPrefab()
@@ -41,10 +43,11 @@ public class Aging : MonoBehaviour
         currentObject.transform.localScale = scale;
     }
 
-    void GrowPrefab()
+    public void GrowPrefab()
     {
+
         Vector3 age = transform.localScale;
-        if (age.x < 4 && age.y < 4 && age.z < 4) // Check if scale is within bounds
+        if (age.x < 1.6f && age.y < 1.6f && age.z < 1.6f) // Check if scale is within bounds
         {
             age += new Vector3(scaleChangeSpeed, scaleChangeSpeed, scaleChangeSpeed);
             transform.localScale = age;
@@ -61,10 +64,10 @@ public class Aging : MonoBehaviour
         }
     }
 
-    void ShrinkPrefab()
+    public void ShrinkPrefab()
     {
         Vector3 age = transform.localScale;
-        if (age.x > 1 && age.y > 1 && age.z > 1) // Check if scale is within bounds
+        if (age.x > 0.6f && age.y > 0.6f && age.z > 0.6f) // Check if scale is within bounds
         {
             age -= new Vector3(scaleChangeSpeed, scaleChangeSpeed, scaleChangeSpeed);
             transform.localScale = age;

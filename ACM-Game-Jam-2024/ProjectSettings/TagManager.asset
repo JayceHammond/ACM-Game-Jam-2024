@@ -7,6 +7,10 @@ TagManager:
   - Rewindable
   - Projectile
   - Platform
+  - Ground
+  - Aging
+  - Door
+  - Button
   layers:
   - Default
   - TransparentFX

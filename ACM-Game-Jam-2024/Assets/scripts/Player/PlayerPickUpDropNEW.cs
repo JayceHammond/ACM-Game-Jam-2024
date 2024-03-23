@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class PlayerPickUpDropNEW : MonoBehaviour
 {
-    [SerializeField] private Transform PlayerCameraTransform;
-    [SerializeField] private Transform ObjectGrabPointTransform;
-    [SerializeField] private LayerMask PickUpLayerMask;
+    [SerializeField] public Transform PlayerCameraTransform;
+    [SerializeField] public Transform ObjectGrabPointTransform;
+    [SerializeField] public LayerMask PickUpLayerMask;
 
     private ObjectsGrabbableNEW ObjectGrabbable;
     private bool grabbed = false;

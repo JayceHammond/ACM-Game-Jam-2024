@@ -12,6 +12,12 @@ public class PlayerController : MonoBehaviour {
     public float jumpForce;
     public bool isGrounded;
 	private RewindTime timeController;
+	public GameObject door;
+
+
+	public void DoorOpen(){
+		door.transform.GetChild(0).transform.position = Vector3.Lerp(door.transform.position, new Vector3(door.transform.position.x, door.transform.position.y + 10, door.transform.position.z), Time.deltaTime);
+	}
 
 	// Use this for initialization
 	void Awake()
@@ -56,6 +62,24 @@ public class PlayerController : MonoBehaviour {
         if(Input.GetKeyDown(KeyCode.R)){
             timeController.Rewind();
         }
+		if(Input.GetKey(KeyCode.C)){
+			RaycastHit hit;
+			if (Physics.Raycast(this.GetComponent<PlayerPickUpDropNEW>().PlayerCameraTransform.position, this.GetComponent<PlayerPickUpDropNEW>().PlayerCameraTransform.forward, out hit, 100f, this.GetComponent<PlayerPickUpDropNEW>().PickUpLayerMask))
+                {
+					if(hit.collider.gameObject.GetComponentInParent<Ageable>().isAgeable){
+						hit.collider.gameObject.GetComponentInParent<Aging>().GrowPrefab();
+					}
+				}
+		}
+		if(Input.GetKey(KeyCode.X)){
+			RaycastHit hit;
+			if (Physics.Raycast(this.GetComponent<PlayerPickUpDropNEW>().PlayerCameraTransform.position, this.GetComponent<PlayerPickUpDropNEW>().PlayerCameraTransform.forward, out hit, 100f, this.GetComponent<PlayerPickUpDropNEW>().PickUpLayerMask))
+                {
+					if(hit.collider.gameObject.GetComponentInParent<Ageable>().isAgeable){
+						hit.collider.gameObject.GetComponentInParent<Aging>().ShrinkPrefab();
+					}
+				}
+		}
 /*
 		// Rotate Left
 		if (Input.GetKey(KeyCode.A))
@@ -113,6 +137,12 @@ public class PlayerController : MonoBehaviour {
         if(col.gameObject.tag == "Ground"){
             isGrounded = true;
         }
+		if(col.gameObject.tag == "Door"){
+			Debug.Log("Win");
+		}
+		if(col.gameObject.tag == "Button"){
+			DoorOpen();
+		}
     }
 
     void OnCollisionExit(Collision col){
