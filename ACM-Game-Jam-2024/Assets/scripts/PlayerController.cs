@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using Unity.VisualScripting;
 
 public class PlayerController : MonoBehaviour {
 
@@ -9,6 +10,8 @@ public class PlayerController : MonoBehaviour {
 	float rotSpeed = 40f;
 	public Animator anim;
 	public Camera playerCam;
+    public float jumpForce;
+    public bool isGrounded;
 
 	// Use this for initialization
 	void Awake()
@@ -18,10 +21,11 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update()
+	void FixedUpdate()
 	{
 		transform.rotation = new Quaternion(0, playerCam.transform.rotation.y, 0, transform.rotation.w);
 		CheckKey();
+        Debug.Log(isGrounded);
 
 	}
 
@@ -30,7 +34,7 @@ public class PlayerController : MonoBehaviour {
 		// Walk
 		if (Input.GetKey(KeyCode.W))
 		{
-            transform.GetComponent<Rigidbody>().AddForce(transform.forward, ForceMode.Impulse);
+            transform.GetComponent<Rigidbody>().AddForce(transform.forward * 1.25f, ForceMode.Impulse);
 			anim.SetBool("Walk_Anim", true);
 		}
 		else if (Input.GetKeyUp(KeyCode.W))
@@ -74,7 +78,10 @@ public class PlayerController : MonoBehaviour {
 
 		//Jump
 		if(Input.GetKeyDown(KeyCode.Space)){
-			
+			if(isGrounded){
+                Debug.Log("Grounded");
+                transform.GetComponent<Rigidbody>().AddForce(transform.up * jumpForce, ForceMode.Impulse);
+            }
 		}
 
 
@@ -91,5 +98,19 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 	}
+
+
+
+    void OnCollisionEnter(Collision col){
+        if(col.gameObject.tag == "Ground"){
+            isGrounded = true;
+        }
+    }
+
+    void OnCollisionExit(Collision col){
+        if(col.gameObject.tag == "Ground"){
+            isGrounded = false;
+        }
+    }
 
 }

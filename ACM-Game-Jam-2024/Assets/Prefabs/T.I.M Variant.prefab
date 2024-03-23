@@ -126,7 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rot: {x: 0, y: 0, z: 0, w: 0}
   anim: {fileID: 7304376090919297670}
-  playerCam: {fileID: 0}
+  playerCam: {fileID: 6738623813804924558, guid: ac838527858cdfe41b5050fbcacecbc9, type: 3}
 --- !u!65 &3350024710866105788
 BoxCollider:
   m_ObjectHideFlags: 0
