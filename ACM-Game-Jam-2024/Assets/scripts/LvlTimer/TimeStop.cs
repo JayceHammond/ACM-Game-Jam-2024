@@ -10,7 +10,7 @@ public class TimeStop : MonoBehaviour
     // Start is called before the first frame update
     void Update()
     {
-        if(Input.GetKey(KeyCode.Tab))
+        if(Input.GetKeyDown(KeyCode.Tab))
         {
             ToggleTimeStop();
             
@@ -23,7 +23,7 @@ public class TimeStop : MonoBehaviour
 
         isTimeStopped = !isTimeStopped;
 
-        GameObject[] projectiles = GameObject.FindGameObjectsWithTag("Projectile");
+        GameObject[] projectiles = GameObject.FindGameObjectsWithTag("Rewindable");
         foreach(GameObject projectile in projectiles)
         {
             Rigidbody rb = projectile.GetComponent<Rigidbody>();
@@ -43,6 +43,6 @@ public class TimeStop : MonoBehaviour
             }
         }
 
-        Time.timeScale = isTimeStopped ? 0f : 1f;
+        
     }
 }
