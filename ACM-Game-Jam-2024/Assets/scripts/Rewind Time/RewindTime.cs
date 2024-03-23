@@ -25,6 +25,10 @@ public class RewindTime : MonoBehaviour
         assignRewindObjects();
     }
 
+    void FixedUpdate(){
+
+    }
+
     private void assignRewindObjects()
     {
         //Debug.Log( GameObject.FindGameObjectsWithTag("Rewindable")[0]);

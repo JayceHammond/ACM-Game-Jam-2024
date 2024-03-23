@@ -11,12 +11,14 @@ public class PlayerController : MonoBehaviour {
 	public Camera playerCam;
     public float jumpForce;
     public bool isGrounded;
+	private RewindTime timeController;
 
 	// Use this for initialization
 	void Awake()
 	{
 		Cursor.lockState = CursorLockMode.Locked;
 		anim = gameObject.GetComponent<Animator>();
+		timeController = GameObject.Find("TimeStact Controller").GetComponent<RewindTime>();
 	}
 
 	// Update is called once per frame
@@ -46,6 +48,13 @@ public class PlayerController : MonoBehaviour {
             anim.SetBool("Walk_Anim", true);
         }else if (Input.GetKeyUp(KeyCode.S)){
             anim.SetBool("Walk_Anim", false);
+        }
+
+		if(Input.GetKeyDown(KeyCode.Q)){
+            timeController.RewindAnchor();
+        }
+        if(Input.GetKeyDown(KeyCode.R)){
+            timeController.Rewind();
         }
 /*
 		// Rotate Left
