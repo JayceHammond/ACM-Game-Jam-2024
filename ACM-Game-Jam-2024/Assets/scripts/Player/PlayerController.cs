@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour {
 	{
 		transform.rotation = new Quaternion(0, playerCam.transform.rotation.y, 0, transform.rotation.w);
 		CheckKey();
-        Debug.Log(isGrounded);
+        //Debug.Log(isGrounded);
 
 	}
 
