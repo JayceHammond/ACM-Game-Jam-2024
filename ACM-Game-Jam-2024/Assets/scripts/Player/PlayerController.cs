@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
 
@@ -80,6 +81,9 @@ public class PlayerController : MonoBehaviour {
 					}
 				}
 		}
+		if(Input.GetKeyDown(KeyCode.L)){
+			ResetLevel();
+		}
 /*
 		// Rotate Left
 		if (Input.GetKey(KeyCode.A))
@@ -150,5 +154,10 @@ public class PlayerController : MonoBehaviour {
             isGrounded = false;
         }
     }
+
+	public void ResetLevel(){
+		string activeScene = SceneManager.GetActiveScene().name;
+		SceneManager.LoadScene(activeScene);
+	}
 
 }
