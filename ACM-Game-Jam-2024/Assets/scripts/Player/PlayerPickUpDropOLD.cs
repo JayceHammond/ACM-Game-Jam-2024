@@ -6,20 +6,21 @@ public class PlayerPickUpDrop : MonoBehaviour {
     [SerializeField] private Transform ObjectGrabPointTransform;
     [SerializeField] private LayerMask PickUpLayerMask;
 
-    private ObjectsGrabbable ObjectGrabbable;
+    public ObjectsGrabbable objectGrabbable;
 
     private void Update(){
         if(Input.GetKeyDown(KeyCode.E)){
-            if (ObjectGrabbable == null) {
+            if (objectGrabbable == null) {
                 float PickUpDistance = 2.0f;
                 if (Physics.Raycast(PlayerCameraTransform.position, PlayerCameraTransform.forward, out RaycastHit raycastHit, PickUpDistance)) {
-                    if (raycastHit.transform.TryGetComponent(out ObjectsGrabbable objectGrabbable)) {
+                    Debug.Log(raycastHit.transform.TryGetComponent(out objectGrabbable));
+                    if (raycastHit.transform.TryGetComponent(out objectGrabbable)) {
                         objectGrabbable.Grab(ObjectGrabPointTransform);
                     }
                 }
             }else{
-                ObjectGrabbable.Drop();
-                ObjectGrabbable = null;
+                objectGrabbable.Drop();
+                objectGrabbable = null;
             }
         }
     }
