@@ -15,6 +15,19 @@ public class PlayerController : MonoBehaviour {
 	private RewindTime timeController;
 	public GameObject door;
 
+	public AudioSource walkSFX;
+	public AudioSource deathSFX;
+	public AudioSource winSFX;
+	public AudioSource BG;
+	bool walkPlayed = false;
+
+
+	void OnStart(){
+		BG = GetComponent<AudioSource>();
+		walkSFX = GetComponent<AudioSource>();
+		deathSFX = GetComponent<AudioSource>();
+		BG.Play(0);
+	}
 
 	public void DoorOpen(){
 		door.transform.GetChild(0).transform.position = Vector3.Lerp(door.transform.position, new Vector3(door.transform.position.x, door.transform.position.y + 10, door.transform.position.z), Time.deltaTime);
@@ -33,6 +46,16 @@ public class PlayerController : MonoBehaviour {
 	{
 		transform.rotation = new Quaternion(0, playerCam.transform.rotation.y, 0, transform.rotation.w);
 		CheckKey();
+		if(anim.GetBool("Walk_Anim")){
+			if(walkPlayed == false){
+				walkSFX.PlayOneShot(walkSFX.clip);
+			}
+			
+			walkPlayed = true;
+		}else{
+			walkSFX.Stop();
+			walkPlayed = false;
+		}
         //Debug.Log(isGrounded);
 
 	}
@@ -44,6 +67,7 @@ public class PlayerController : MonoBehaviour {
 		{
             transform.GetComponent<Rigidbody>().AddForce(transform.forward, ForceMode.Impulse);
 			anim.SetBool("Walk_Anim", true);
+			
 		}
 		else if (Input.GetKeyUp(KeyCode.W))
 		{
@@ -157,6 +181,7 @@ public class PlayerController : MonoBehaviour {
 
 	public void ResetLevel(){
 		string activeScene = SceneManager.GetActiveScene().name;
+		deathSFX.Play(0);
 		SceneManager.LoadScene(activeScene);
 	}
 
