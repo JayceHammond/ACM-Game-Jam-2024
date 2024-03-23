@@ -147,6 +147,10 @@ public class PlayerController : MonoBehaviour {
 		if(col.gameObject.tag == "Button"){
 			DoorOpen();
 		}
+		if(col.gameObject.tag == "Restart"){
+			ResetLevel();
+
+		}
     }
 
     void OnCollisionExit(Collision col){

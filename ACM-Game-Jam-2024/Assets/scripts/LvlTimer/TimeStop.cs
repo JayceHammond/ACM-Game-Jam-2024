@@ -43,6 +43,15 @@ public class TimeStop : MonoBehaviour
             }
         }
 
+        GameObject[] restarts = GameObject.FindGameObjectsWithTag("Restart");
+        foreach(GameObject restart in restarts)
+        {
+            Rigidbody rb = restart.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.isKinematic = isTimeStopped; // Freeze or unfreeze the Rigidbody
+            }
+        }
         
     }
 }
